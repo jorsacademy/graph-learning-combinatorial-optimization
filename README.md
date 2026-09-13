@@ -10,6 +10,8 @@ Can a graph neural model learn structural information from exact small-instance 
 
 **Phase 3 implemented: multi-seed statistical evaluation + deeper OOD size shift + latency decomposition.**
 
+A controlled **GraphSAGE architecture ablation** is also included to test whether edge-aware message passing materially improves downstream TSP decisions relative to node-only neighborhood aggregation.
+
 The repository now includes:
 
 - deterministic Euclidean TSP generation;
@@ -17,6 +19,7 @@ The repository now includes:
 - nearest-neighbor and 2-opt baselines;
 - exact-tour edge supervision;
 - permutation-equivariant PyTorch message-passing GNN;
+- GraphSAGE-style k-NN node-aggregation baseline for architecture ablation;
 - greedy, beam and multi-start feasible decoding;
 - 2-opt post-refinement;
 - validation checkpoint selection;
@@ -56,6 +59,14 @@ For GNN beam + 2-opt versus nearest-neighbor + 2-opt, Phase 3 reports:
 
 A negative paired gap difference favors the GNN method. Statistical significance alone is not considered sufficient for promotion; latency and feasibility remain part of the decision.
 
+## Architecture ablation
+
+`python -m gnn_solver.architecture_ablation` compares the primary edge-aware `EdgeGNN` against a GraphSAGE-style baseline under matched training data, exact labels, model seeds, validation selection, decoder, 2-opt refinement and test/OOD blocks.
+
+The GraphSAGE baseline uses k-nearest-neighbor mean aggregation over node states and exposes pairwise distance only when constructing the neighborhood and scoring final candidate edges. It therefore tests whether injecting edge features directly into learned messages provides downstream decision value.
+
+See [`docs/graphsage_ablation.md`](./docs/graphsage_ablation.md) for the controlled experimental contract.
+
 ## Latency decomposition
 
 The neural pipeline records separately:
@@ -78,6 +89,7 @@ pytest -q
 python -m gnn_solver.evaluate
 python -m gnn_solver.phase2_experiment
 python -m gnn_solver.phase3_experiment
+python -m gnn_solver.architecture_ablation
 ```
 
 ## Repository layout
@@ -97,6 +109,7 @@ src/gnn_solver/
   evaluate.py
   phase2_experiment.py
   phase3_experiment.py
+  architecture_ablation.py
 tests/
   test_core.py
   test_neural.py
@@ -106,6 +119,7 @@ configs/
   experiment.json
 docs/
   experimental_protocol.md
+  graphsage_ablation.md
 .github/workflows/
   ci.yml
 ```
@@ -117,6 +131,7 @@ docs/
 - test/OOD blocks are never used for model selection;
 - model-seed replication is not confused with test-sample replication;
 - nearest-neighbor + 2-opt is the main classical reference;
+- architecture comparisons must hold decoder and evaluation protocol fixed;
 - quality gains must be interpreted together with latency;
 - negative or null GNN results are retained.
 
@@ -128,7 +143,7 @@ Reuse the graph-learning stack on capacitated vehicle routing with explicit dema
 
 ## Scope boundary
 
-The TSP benchmark is now complete enough to serve as the controlled methodology layer. Large-scale VRP, learned branching, neural cut selection and scheduling graphs should be separate extensions rather than silent additions to the TSP benchmark.
+The TSP benchmark is now complete enough to serve as the controlled methodology layer. The GraphSAGE contribution is retained only as an architecture ablation; generic Cora node-classification and embedding-visualization tutorials are intentionally out of scope. Large-scale VRP, learned branching, neural cut selection and scheduling graphs should be separate extensions rather than silent additions to the TSP benchmark.
 
 ## License
 
