@@ -1,0 +1,19 @@
+{
+  "training_instances": 48,
+  "validation_instances": 12,
+  "evaluation_instances_per_scenario": 6,
+  "min_train_vertices": 8,
+  "max_train_vertices": 12,
+  "min_size_shift_vertices": 14,
+  "max_size_shift_vertices": 16,
+  "edge_probability": 0.3,
+  "beta_values": [2.0, 4.0, 6.0],
+  "evaluation_beta": 6.0,
+  "beta_shift": 10.0,
+  "training_steps": 1500,
+  "training_batch_size": 8,
+  "samples_per_instance": 512,
+  "hidden_dim": 64,
+  "message_passing_rounds": 3,
+  "seed": 2026
+}

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: GFlowNet Combinatorial Optimization
+type: software
+message: "Please cite this repository and the primary GFlowNet papers listed in the documentation."
+authors:
+  - name: jorsacademy
+version: 0.1.0
+date-released: 2026-09-04
+repository-code: "https://github.com/jorsacademy/gflownet-combinatorial-optimization"
+license: PolyForm-Noncommercial-1.0.0
+keywords:
+  - operations research
+  - combinatorial optimization
+  - GFlowNet
+  - trajectory balance
+  - maximum-weight independent set
