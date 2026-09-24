@@ -1,4 +1,20 @@
-# Graph Neural Solver for Combinatorial Optimization
+# Graph Learning for Combinatorial Optimization
+
+<!-- portfolio-umbrella:start -->
+## Portfolio role
+
+This repository is the primary umbrella repository for this Jors Academy research area. Related projects have been consolidated under `projects/` so the methods, implementations, experiments, and case studies can be maintained and explored from one place.
+
+### Included projects
+
+- [`gflownet-combinatorial-optimization`](projects/gflownet-combinatorial-optimization/)
+- [`gnn-minimum-vertex-cover`](projects/gnn-minimum-vertex-cover/)
+- [`graph-attention-network-cora`](projects/graph-attention-network-cora/)
+- [`graphsage-cora-node-classification`](projects/graphsage-cora-node-classification/)
+- [`neural-algorithmic-reasoning-combinatorial-optimization`](projects/neural-algorithmic-reasoning-combinatorial-optimization/)
+
+Each consolidated project keeps its own files and a `SOURCE_REPOSITORY.md` provenance record. The snapshot preserves the source repository's default-branch files at consolidation time; repository-level history and metadata remain separate from the snapshot.
+<!-- portfolio-umbrella:end -->
 
 Research-oriented benchmark for **learning-augmented combinatorial optimization** with graph neural networks and exact/heuristic OR baselines.
 
